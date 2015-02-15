@@ -1,2 +1,4 @@
-spasi buat nambah
-- buat kurangi
+buat ngantri, pakai suara.
+
+- spasi buat nambah
+- ```-``` buat kurangi
