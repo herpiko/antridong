@@ -1,0 +1,98 @@
+<!--antridong-->
+<html>
+<script src="jquery.js"></script>
+<audio src="nomor/1.wav" id="1" preload="auto"></audio>
+<audio src="nomor/2.wav" id="2" preload="auto"></audio>
+<audio src="nomor/tiga.mp3" id="3" preload="auto"></audio>
+<audio src="nomor/empat.mp3" id="4" preload="auto"></audio>
+<audio src="nomor/lima.mp3" id="5" preload="auto"></audio>
+<audio src="nomor/enam.mp3" id="6" preload="auto"></audio>
+<audio src="nomor/tujuh.mp3" id="7" preload="auto"></audio>
+<audio src="nomor/delapan.mp3" id="8" preload="auto"></audio>
+<audio src="nomor/sembilan.mp3" id="9" preload="auto"></audio>
+<audio src="nomor/sepuluh.mp3" id="10" preload="auto"></audio>
+<audio src="nomor/sebelas.mp3" id="11" preload="auto"></audio>
+<audio src="nomor/belas.mp3" id="belas" preload="auto"></audio>
+<audio src="nomor/puluh.mp3" id="puluh" preload="auto"></audio>
+<audio src="nomor/seratus.mp3" id="seratus" preload="auto"></audio>
+
+
+<body>
+<div id="noantri" style="font-size:600px;text-align:center;margin-top:auto;margin-right:auto;">
+</div>
+<script>
+		var nomor = 0;
+		var nomordong = "000";
+		$("#noantri").text(nomordong);
+
+		var lanjutdong = function(yoi){
+			if (yoi) {
+				nomor++;
+			} else {
+				nomor--;
+			}
+			console.log(nomor);
+			
+			if (nomor.toString().length === 1) {
+				nomordong = "00" + nomor.toString();
+			} else if (nomor.toString().length === 2) {
+				nomordong = "0" + nomor.toString();
+			} else {
+				nomordong = nomor.toString();
+			}
+			if (nomordong[0] === "0" && nomordong[1] === "0") {
+				document.getElementById(nomordong[2]).play();	
+			}
+			if (nomordong[0] === "0" && nomordong[1] != "0") {
+				if (nomordong[1] === "1" && nomordong[2] === "0") {
+					document.getElementById("10").play();	
+				} else if (nomordong[1] === "1" && nomordong[2] === "1") {
+					document.getElementById("11").play();
+				} else if (nomordong[1] != "1") {
+					document.getElementById(nomordong[1]).play();
+					if (nomordong[1] === "8" || nomordong[1] === "9") {
+						delay = 800;
+					} else {
+						delay = 600;
+					}
+					setTimeout(function(){
+						document.getElementById("puluh").play();
+						if (nomordong[2] != "0") {
+							setTimeout(function(){
+								document.getElementById(nomordong[2]).play();
+							}, 600);	
+						}
+						
+					}, delay);
+				} else if (nomordong[1] === "1") {
+					var delay;
+					document.getElementById(nomordong[2]).play();
+					if (nomordong[2] === "8" || nomordong[2] === "9") {
+						delay = 800;
+					} else {
+						delay = 600;
+					}
+					setTimeout(function(){
+						document.getElementById("belas").play();
+					}, delay);
+				}
+			} else if (nomordong[0] === "1") {
+			document.getElementById("seratus").play();
+			}
+			
+			$("#noantri").text(nomordong);
+		}
+	
+		$(document).ready(function() {
+        	$(document).keydown(function(e) {
+          		if (e.keyCode == '32' && nomordong != "100") {
+            		lanjutdong(true);
+          		} else if (e.keyCode == '189') {
+          			lanjutdong(false);
+          		}
+        	});
+
+      });
+	</script>
+</body>
+</html>
